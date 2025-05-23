@@ -1,5 +1,6 @@
 const TABLE = SpreadsheetApp.getActiveSpreadsheet()
 const LENGTH = 531
+const CHUNK_SIZE = 100
 
 const sheets = {
   main: TABLE.getSheetByName("Main"),
