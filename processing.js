@@ -1,3 +1,6 @@
+// Fetches data
+const getData = url => JSON.parse(UrlFetchApp.fetch(url).getContentText())
+
 // Calculates the p-th percentile of a sorted array using linear interpolation
 const percentile = (arr, p) => {
     if (arr.length === 0) return NaN
