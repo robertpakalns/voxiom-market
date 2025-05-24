@@ -1,11 +1,11 @@
 const CHUNK_SIZE = 100
 
-const newChunk = () => {
+const setPricesHistory = () => {
   const scriptProperties = PropertiesService.getScriptProperties()
   const index = parseInt(scriptProperties.getProperty("index")) || 1
   let targetCol = parseInt(scriptProperties.getProperty("targetCol"))
 
-  const { history } = sheets
+  const { main, history } = sheets
 
   if (!targetCol) {
     targetCol = history.getLastColumn() + 1
@@ -32,7 +32,14 @@ const newChunk = () => {
 
   if (end < LENGTH) {
     scriptProperties.setProperty("index", end + 1)
-    ScriptApp.newTrigger("newChunk").timeBased().after(2000).create()
+
+    ScriptApp.newTrigger("setPricesHistory").timeBased().after(2000).create()
   }
-  else scriptProperties.deleteAllProperties()
+  else {
+    scriptProperties.deleteAllProperties()
+
+    // Set prices
+    const values = rotation.getRange(2, rotation.getLastColumn(), rotation.getLastRow() - 1, 1).getValues()
+    main.getRange(2, 5, values.length, 1).setValues(values)
+  }
 }
