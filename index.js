@@ -1,6 +1,6 @@
-const { main, rotation } = sheets
-
 const init = () => {
+    const { main, rotation } = sheets
+
     setPricesHistory()
 
     // Set rotation 
