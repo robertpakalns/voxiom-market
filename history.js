@@ -1,4 +1,4 @@
-const CHUNK_SIZE = 100
+const CHUNK_SIZE = 50
 
 const setPricesHistory = () => {
   const scriptProperties = PropertiesService.getScriptProperties()
@@ -25,7 +25,7 @@ const setPricesHistory = () => {
     const value = processData(data.data.price_history)
     values.push([value])
 
-    Utilities.sleep(1000)
+    Utilities.sleep(2000)
   }
 
   history.getRange(index + 1, targetCol, values.length, 1).setValues(values)
