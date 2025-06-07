@@ -1,6 +1,15 @@
 const CHUNK_SIZE = 50
 
-const setPricesHistory = () => {
+const setPricesHistory = e => {
+  if (e && e.triggerUid) {
+    for (const trigger of ScriptApp.getProjectTriggers()) {
+      if (trigger.getUniqueId() === e.triggerUid) {
+        ScriptApp.deleteTrigger(trigger)
+        break
+      }
+    }
+  }
+
   const scriptProperties = PropertiesService.getScriptProperties()
   const index = parseInt(scriptProperties.getProperty("index")) || 1
   let targetCol = parseInt(scriptProperties.getProperty("targetCol"))
